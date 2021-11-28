@@ -19,7 +19,7 @@ import DummyAvatar from "./components/DummyAvatar";
 
 const ydoc = new Y.Doc();
 const ymap = ydoc.getMap("map");
-new WebrtcProvider("multiplayer-test25", ydoc);
+new WebrtcProvider("multiplayer-test26", ydoc);
 const avatarStore = proxy({});
 bindProxyAndYMap(avatarStore, ymap);
 
@@ -81,6 +81,7 @@ function App() {
                         snap[user].position.z,
                       ]}
                       rotation={[0, snap[user].rotation.y, 0]}
+                      animation={snap[user].animation}
                     />
                   ))}
                 <ambientLight intensity={0.9} />

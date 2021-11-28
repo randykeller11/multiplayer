@@ -13,7 +13,28 @@ export default function Model({ ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/dummyAvatar.glb");
   const { actions } = useAnimations(animations, group);
-  //   const [isFirstRender, setIsFirstRender] = useState(true);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
+  useFrame(() => {
+    if (isFirstRender) {
+      actions["idle"].play();
+      setIsFirstRender(false);
+    }
+    if (props.animation === "idle" && !isFirstRender) {
+      actions["walk"].stop();
+      actions["idle"].play();
+      group.current.position.z = props.position[2];
+      group.current.position.x = props.position[0];
+      group.current.rotation.y = props.rotation[1];
+    }
+    if (props.animation === "walk" && !isFirstRender) {
+      actions["idle"].stop();
+      actions["walk"].play();
+      group.current.position.z = props.position[2];
+      group.current.position.x = props.position[0];
+      group.current.rotation.y = props.rotation[1];
+    }
+  });
 
   //   useEffect(() => {
   //     if (isFirstRender) {

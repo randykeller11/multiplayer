@@ -19,7 +19,7 @@ export default function Model({ store, username }) {
   const aPress = useKeyPress("a");
   const dPress = useKeyPress("d");
 
-  // const [animation, setAnimation] = useState("idle");
+  const [animation, setAnimation] = useState("idle");
 
   useFrame((state, delta) => {
     const moveDistance = 5 * delta; // 200 pixels per second
@@ -32,10 +32,10 @@ export default function Model({ store, username }) {
 
       group.current.position.z = savedPos.current.position.z;
       group.current.position.x = savedPos.current.position.x;
-      // if (animation != "idle") {
-      //   setAnimation("idle");
-      //   store[`${username}`].animation = "idle";
-      // }
+      if (animation != "idle") {
+        setAnimation("idle");
+        store[`${username}`].animation = "idle";
+      }
     }
 
     if (wPress) {
@@ -55,10 +55,10 @@ export default function Model({ store, username }) {
         z: group.current.position.z,
       };
       store[`${username}`].position = storeUpdate;
-      // if (animation != "walk") {
-      //   setAnimation("walk");
-      //   store[`${username}`].animation = "walk";
-      // }
+      if (animation != "walk") {
+        setAnimation("walk");
+        store[`${username}`].animation = "walk";
+      }
     }
 
     if (aPress) {
