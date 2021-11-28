@@ -19,6 +19,8 @@ export default function Model({ store, username }) {
   const aPress = useKeyPress("a");
   const dPress = useKeyPress("d");
 
+  // const [animation, setAnimation] = useState("idle");
+
   useFrame((state, delta) => {
     const moveDistance = 5 * delta; // 200 pixels per second
     const rotateAngle = (Math.PI / 2) * delta; // pi/2 radians (90 degrees) per second
@@ -30,6 +32,10 @@ export default function Model({ store, username }) {
 
       group.current.position.z = savedPos.current.position.z;
       group.current.position.x = savedPos.current.position.x;
+      // if (animation != "idle") {
+      //   setAnimation("idle");
+      //   store[`${username}`].animation = "idle";
+      // }
     }
 
     if (wPress) {
@@ -49,6 +55,10 @@ export default function Model({ store, username }) {
         z: group.current.position.z,
       };
       store[`${username}`].position = storeUpdate;
+      // if (animation != "walk") {
+      //   setAnimation("walk");
+      //   store[`${username}`].animation = "walk";
+      // }
     }
 
     if (aPress) {
@@ -65,20 +75,20 @@ export default function Model({ store, username }) {
       };
       store[`${username}`].rotation = storeUpdate;
     }
-    // const relativeCameraOffset = new THREE.Vector3(-0.6, 1.9, -4);
-    // const thirdPersonTarget = new THREE.Vector3(0, 2.1, 5);
+    const relativeCameraOffset = new THREE.Vector3(-0.6, 1.9, -4);
+    const thirdPersonTarget = new THREE.Vector3(0, 2.1, 5);
 
-    // var cameraOffset = relativeCameraOffset.applyMatrix4(
-    //   group.current.matrixWorld
-    // );
-    // var targetOffset = thirdPersonTarget.applyMatrix4(
-    //   group.current.matrixWorld
-    // );
+    var cameraOffset = relativeCameraOffset.applyMatrix4(
+      group.current.matrixWorld
+    );
+    var targetOffset = thirdPersonTarget.applyMatrix4(
+      group.current.matrixWorld
+    );
 
-    // state.camera.position.x = cameraOffset.x;
-    // state.camera.position.y = cameraOffset.y;
-    // state.camera.position.z = cameraOffset.z;
-    // state.camera.lookAt(targetOffset);
+    state.camera.position.x = cameraOffset.x;
+    state.camera.position.y = cameraOffset.y;
+    state.camera.position.z = cameraOffset.z;
+    state.camera.lookAt(targetOffset);
   });
   return (
     <group ref={group} dispose={null}>

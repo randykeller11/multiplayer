@@ -19,7 +19,7 @@ import DummyAvatar from "./components/DummyAvatar";
 
 const ydoc = new Y.Doc();
 const ymap = ydoc.getMap("map");
-new WebrtcProvider("multiplayer-test23", ydoc);
+new WebrtcProvider("multiplayer-test25", ydoc);
 const avatarStore = proxy({});
 bindProxyAndYMap(avatarStore, ymap);
 
@@ -71,7 +71,6 @@ function App() {
           <Suspense fallback={null}>
             <Canvas camera={{ position: [0, 4, 6] }}>
               <Suspense fallback={<Loader />}>
-                <OrbitControls />
                 <Avatar5 store={avatarStore} username={username} />
                 {otherUsers &&
                   otherUsers.map((user) => (
