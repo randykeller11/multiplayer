@@ -19,7 +19,8 @@ import DummyAvatar from "./components/DummyAvatar";
 
 const ydoc = new Y.Doc();
 const ymap = ydoc.getMap("map");
-new WebrtcProvider("multiplayer-test26", ydoc);
+//master branch is test27
+new WebrtcProvider("multiplayer-test27", ydoc);
 const avatarStore = proxy({});
 bindProxyAndYMap(avatarStore, ymap);
 
