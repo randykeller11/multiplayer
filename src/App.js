@@ -20,7 +20,7 @@ import DummyAvatar from "./components/DummyAvatar";
 const ydoc = new Y.Doc();
 const ymap = ydoc.getMap("map");
 //master branch is test27
-new WebrtcProvider("multiplayer-test27", ydoc);
+const provider = new WebrtcProvider("multiplayer-test28", ydoc);
 const avatarStore = proxy({});
 bindProxyAndYMap(avatarStore, ymap);
 
@@ -32,14 +32,14 @@ function Loader() {
 function App() {
   const [appState, setAppState] = useState(0);
   const [username, setUsername] = useState("");
+  const [newPeer, setNewPeer] = useState(null);
+
+  provider.on("peers", (e) => setNewPeer(console.log(e)));
+
   const snap = useSnapshot(avatarStore);
   const otherUsers = Object.keys({ ...snap }).filter(
     (user) => user != username
   );
-
-  useEffect(() => {
-    console.log(snap);
-  }, [snap]);
 
   return (
     <>
