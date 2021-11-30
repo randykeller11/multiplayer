@@ -57,7 +57,7 @@ function App() {
             onClick={() => {
               avatarStore[`${username}`] = {
                 position: { x: 0, y: 0, z: 0 },
-                rotation: { x: 0, y: 0, z: 0 },
+                rotation: { y: 0 },
                 animation: "idle",
               };
               setAppState(1);
